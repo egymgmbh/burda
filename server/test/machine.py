@@ -11,91 +11,91 @@ def create_producer(host):
     return producer
 
 
-def create_message(payload):
-    return json.dumps(
-        {'machine_id': 4567, 'machine_type': 'M18', 'timestamp': time.time(), 'rfid': '0x1234567', 'payload': payload})
+def create_message(message_name, payload):
+    return '{} {}'.format(message_name, json.dumps(
+        {'machine_id': 4567, 'machine_type': 'M18', 'timestamp': time.time(), 'rfid': '0x1234567',
+         'payload': json.dumps(payload)}))
 
 
 def create_login_payload():
-    return json.dumps(
-        {'gender': 'Male', 'goal': 'FITNESS', 'height': 182, 'intensity': 'MEDIUM', 'first_name': 'Shawn'})
+    return {'gender': 'Male', 'goal': 'FITNESS', 'height': 182, 'intensity': 'MEDIUM', 'first_name': 'Shawn'}
 
 
 def create_start_training_payload():
-    return json.dumps({'training_method': 'regular', 'training_weight_concentric': 50, 'training_weight_excentric': 70,
-                       'number_of_repetitions': 8})
+    return {'training_method': 'regular', 'training_weight_concentric': 50, 'training_weight_excentric': 70,
+            'number_of_repetitions': 8}
 
 
 def create_end_training_payload():
-    return json.dumps({'moved_weight': 480})
+    return {'moved_weight': 480}
 
 
 def create_end_strength_measurement_payload():
-    return json.dumps({'weight': 275})
+    return {'weight': 275}
 
 
 def create_training_position_data_payload():
-    return json.dumps({'position': 0.75})
+    return {'position': 0.75}
 
 
 def create_training_weight_data_payload():
-    return json.dumps({'weight': 65})
+    return {'weight': 65}
 
 
 def create_training_direction_data_payload():
-    return json.dumps({'direction': 'concentric'})
+    return {'direction': 'concentric'}
 
 
 def create_training_repetition_data_payload():
-    return json.dumps({'repetition': 3})
+    return {'repetition': 3}
 
 
 def create_empty_payload():
-    return json.dumps({})
+    return None
 
 
 def create_login_message():
-    return 'login {}'.format(create_message(create_login_payload()))
+    return create_message('login', create_login_payload())
 
 
 def create_logout_message():
-    return 'logout {}'.format(create_empty_payload())
+    return create_message('logout', create_empty_payload())
 
 
 def create_trainer_needed_message():
-    return 'trainer_needed {}'.format(create_empty_payload())
+    return create_message('trainer_needed', create_empty_payload())
 
 
 def create_start_training_message():
-    return 'start_training {}'.format(create_start_training_payload())
+    return create_message('start_training', create_start_training_payload())
 
 
 def create_end_training_message():
-    return 'end_training {}'.format(create_end_training_payload())
+    return create_message('end_training', create_end_training_payload())
 
 
 def create_start_strength_measurement_message():
-    return 'start_strength_measurement {}'.format(create_empty_payload())
+    return create_message('start_strength_measurement', create_empty_payload())
 
 
 def create_end_strength_measurement_message():
-    return 'end_strength_measurement {}'.format(create_end_strength_measurement_payload())
+    return create_message('end_strength_measurement', create_end_strength_measurement_payload())
 
 
 def create_training_position_data_message():
-    return 'training_position_data {}'.format(create_training_position_data_payload())
+    return create_message('training_position_data', create_training_position_data_payload())
 
 
 def create_training_weight_data_message():
-    return 'training_weight_data {}'.format(create_training_weight_data_payload())
+    return create_message('training_weight_data', create_training_weight_data_payload())
 
 
 def create_training_direction_data_message():
-    return 'training_direction_data {}'.format(create_training_direction_data_payload())
+    return create_message('training_direction_data', create_training_direction_data_payload())
 
 
 def create_training_repetition_data_message():
-    return 'training_repetition_data {}'.format(create_training_repetition_data_payload())
+    return create_message('training_repetition_data', create_training_repetition_data_payload())
 
 
 def send_fake_machine_training_flow(producer):
