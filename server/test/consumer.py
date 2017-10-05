@@ -1,7 +1,9 @@
 import zmq
 
+
 def subscribe(host):
     return subscribe_with_filter(host, "")
+
 
 def subscribe_with_filter(host, topic_filter):
     subscriber = zmq.Context().socket(zmq.SUB)
@@ -9,12 +11,17 @@ def subscribe_with_filter(host, topic_filter):
     subscriber.connect(host)
     return subscriber
 
+
 def await_and_consume(subscriber, handlers):
     while True:
-        (topic, data) = subscriber.recv().split()
-        handlers[topic](data)
+        (topic, data) = subscriber.recv().split(" ", 1)
+        handler = handlers.get(topic, None)
+        if handler:
+            handler(data)
 
-def hello_topic_handler(data):
-    print("Handling {}".format(data))
 
-await_and_consume(subscribe("tcp://35.187.37.87:5556"), {'hello': hello_topic_handler})
+def login_topic_handler(data):
+    print("Login with data: {}".format(data))
+
+
+await_and_consume(subscribe("tcp://35.187.37.87:5556"), {'login': login_topic_handler})
