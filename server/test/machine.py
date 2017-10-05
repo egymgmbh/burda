@@ -118,6 +118,6 @@ def send_fake_machine_strength_measurment_flow(producer):
     producer.send(create_logout_message())
 
 
-producer = create_producer("tcp://35.187.37.87:5557")
+producer = create_producer("tcp://35.195.199.160:5557")
 send_fake_machine_training_flow(producer)
 send_fake_machine_strength_measurment_flow(producer)

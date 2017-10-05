@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>sockjsproxy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="js/JSMQ.js"></script>
+</head>
+<body>
+
+	<script>
+	    var subscriber = new JSMQ.Subscriber();
+        subscriber.connect("ws://127.0.0.1:5556");
+        subscriber.subscribe("");
+
+        subscriber.onMessage = function (message) {
+            console.log(message)
+        };
+
+	</script>
+
+</body>
+</html>
