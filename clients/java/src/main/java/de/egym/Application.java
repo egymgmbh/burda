@@ -18,7 +18,7 @@ public final class Application {
 
 	private void subscribeAndAwait() {
 		try (final ZContext context = new ZContext()) {
-			final ZMQ.Socket socket = context.createSocket(ZMQ.PULL);
+			final ZMQ.Socket socket = context.createSocket(ZMQ.SUB);
 
 			if (socket.connect(HOST) && socket.subscribe("")) {
 				processEvents(socket);
