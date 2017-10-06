@@ -10,7 +10,7 @@ import org.zeromq.ZMQ;
 
 public final class Application {
 
-	private static final String HOST = "tcp://35.187.37.87:5556";
+	private static final String HOST = "tcp://35.195.199.160:5556";
 
 	private Application() {
 
@@ -18,7 +18,7 @@ public final class Application {
 
 	private void subscribeAndAwait() {
 		try (final ZContext context = new ZContext()) {
-			final ZMQ.Socket socket = context.createSocket(ZMQ.SUB);
+			final ZMQ.Socket socket = context.createSocket(ZMQ.PULL);
 
 			if (socket.connect(HOST) && socket.subscribe("")) {
 				processEvents(socket);
