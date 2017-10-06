@@ -14,7 +14,7 @@ def create_producer(host):
 def create_message(message_name, payload):
     return '{} {}'.format(message_name, json.dumps(
         {'machine_id': 4567, 'machine_type': 'M18', 'timestamp': time.time(), 'rfid': '0x1234567',
-         'payload': json.dumps(payload)}))
+         'payload': payload}))
 
 
 def create_login_payload():
