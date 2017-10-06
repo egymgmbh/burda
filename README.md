@@ -38,8 +38,7 @@ An example message might look like this:
    "machine_type":"M18"
 }”
 ```
-###All messages are of the form:
-####<message_type> <message_body>
+All messages are of the form *“<message_type> <message_body>”*.
 
 ### Payload Definition
 
