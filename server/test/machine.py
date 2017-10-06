@@ -12,9 +12,9 @@ def create_producer(host):
 
 
 def create_message(message_name, payload):
-    return [message_name, json.dumps(
-        {'machine_id': 4567, 'machine_type': 'M18', 'timestamp': time.time(), 'rfid': '0x1234567',
-         'payload': payload})]
+    return '{} {}'.format(message_name, json.dumps(
+        {'machine_id': 4567, 'machine_type': 'M81', 'timestamp': time.time(), 'rfid': '0x1234567',
+         'payload': json.dumps(payload)}))
 
 
 def create_login_payload():
@@ -99,23 +99,23 @@ def create_training_repetition_data_message():
 
 
 def send_fake_machine_training_flow(producer):
-    producer.send_multipart(create_login_message())
-    producer.send_multipart(create_start_training_message())
+    producer.send(create_login_message())
+    producer.send(create_start_training_message())
 
     for _ in range(10):
-        producer.send_multipart(create_training_position_data_message())
-        producer.send_multipart(create_training_weight_data_message())
-    producer.send_multipart(create_training_direction_data_message())
-    producer.send_multipart(create_training_repetition_data_message())
-    producer.send_multipart(create_end_training_message())
-    producer.send_multipart(create_logout_message())
+        producer.send(create_training_position_data_message())
+        producer.send(create_training_weight_data_message())
+    producer.send(create_training_direction_data_message())
+    producer.send(create_training_repetition_data_message())
+    producer.send(create_end_training_message())
+    producer.send(create_logout_message())
 
 
 def send_fake_machine_strength_measurment_flow(producer):
-    producer.send_multipart(create_login_message())
-    producer.send_multipart(create_start_strength_measurement_message())
-    producer.send_multipart(create_end_strength_measurement_message())
-    producer.send_multipart(create_logout_message())
+    producer.send(create_login_message())
+    producer.send(create_start_strength_measurement_message())
+    producer.send(create_end_strength_measurement_message())
+    producer.send(create_logout_message())
 
 
 producer = create_producer("tcp://35.195.199.160:5557")

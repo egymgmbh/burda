@@ -118,7 +118,7 @@ Emitted when a user ends the training.
 * **moved_weight**
 number, the weight moved during the training in kilograms
 
-####start_strength_measurement
+#### start_strength_measurement
 Emitted when a user starts a strength measurement.
 
     "start_strength_measurement {

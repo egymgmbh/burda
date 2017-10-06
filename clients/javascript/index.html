@@ -9,17 +9,14 @@
 <body>
 
 <script>
-    window.onload = function () {
-        var websocket = new SockJS('http://localhost:5558');
-        websocket.onmessage = function (e) {
-            console.log("Data Received: " + e.data);
-        }
-        websocket.onopen = function () {
-            console.log('open');
-        };
 
+    var websocket = new SockJS('http://35.195.199.160:5558');
+    websocket.onmessage = function (e) {
+        console.log("Data Received: " + e.data);
+    }
+    websocket.onopen = function () {
+        console.log('open');
     };
-
 </script>
 
 </body>

@@ -20,22 +20,25 @@ log = logging.getLogger("sockjsproxy")
 
 class BackendConnection(object):
     def __init__(self, io_loop, out_socket):
-        self.zmq_out = zmqstream.ZMQStream(out_socket, io_loop=io_loop)
-        self.zmq_out.on_recv(self.on_recv)
+        self.out_socket = out_socket
+        self.io_loop = io_loop
+        self.io_loop.add_timeout(50, self.recieve)
 
     def set_frontend_connection(self, frontend):
         self.frontend = frontend
 
-    def on_recv(self, data):
+    def recieve(self):
         try:
-            command, message = data
-        except ValueError:
-            log.warn("Recieved invalid data: %s. Expected [command|data] multipart message.")
-            return
-        log.debug('Got %s :: %s', command, message)
-        self.frontend.send(str("{} {}".format(command.decode("utf-8"), message.decode("utf-8"))))
+            data = self.out_socket.recv_string(zmq.NOBLOCK)
+            self.on_recv(data)
+        except zmq.ZMQError as e:
+            # continue
+            pass
+        self.io_loop.add_timeout(50, self.recieve)
 
-
+    def on_recv(self, data):
+        log.debug('Got %s :: %s', data)
+        self.frontend.send(data)
 
 class FrontendTransport(SockJSConnection):
     """
@@ -111,7 +114,8 @@ class SockJSProxy(object):
         log.info("Pulling outgoing messages from: %s", out_address)
 
         ctx = zmq.Context()
-        out_socket = ctx.socket(zmq.PULL)
+        out_socket = ctx.socket(zmq.SUB)
+        out_socket.setsockopt_string(zmq.SUBSCRIBE, '')
         out_socket.connect(out_address)
 
         io_loop = ioloop.IOLoop.instance() # ZMQ loop
