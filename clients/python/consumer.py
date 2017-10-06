@@ -6,16 +6,15 @@ def subscribe(host):
 
 
 def subscribe_with_filter(host, topic_filter):
-    subscriber = zmq.Context().socket(zmq.SUB)
-    subscriber.setsockopt(zmq.SUBSCRIBE, topic_filter)
+    subscriber = zmq.Context().socket(zmq.PULL)
     subscriber.connect(host)
     return subscriber
 
 
 def await_and_consume(subscriber, handlers):
     while True:
-        (topic, data) = subscriber.recv().split(" ", 1)
-        handler = handlers.get(topic, None)
+        (type, data) = subscriber.recv_multipart()
+        handler = handlers.get(type, None)
         if handler:
             handler(data)
 

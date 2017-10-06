@@ -1,16 +1,19 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 import zmq
 
 context = zmq.Context()
 consumer = context.socket(zmq.PULL)
 consumer.bind('tcp://*:5557')
 
-publisher = context.socket(zmq.PUB)
+publisher = context.socket(zmq.PUSH)
 publisher.bind("tcp://*:5556")
-
-print("zeromq server started")
+print("zeroMQ server started")
 
 while True:
-    data = consumer.recv()
-    print("Publishing message {}".format(data))
-    publisher.send(data)
+    try:
+        data = consumer.recv_multipart()
+        print(data)
+        publisher.send_multipart(data)
+    except Exception as e:
+        print("Exception caught {}".format(e))
+

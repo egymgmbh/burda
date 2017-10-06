@@ -4,20 +4,23 @@
 <head>
     <title>sockjsproxy</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script type="text/javascript" src="js/JSMQ.js"></script>
+    <script src="js/sockjs-0.3.js"></script>
 </head>
 <body>
 
-	<script>
-	    var subscriber = new JSMQ.Subscriber();
-        subscriber.connect("ws://127.0.0.1:5556");
-        subscriber.subscribe("");
-
-        subscriber.onMessage = function (message) {
-            console.log(message)
+<script>
+    window.onload = function () {
+        var websocket = new SockJS('http://localhost:5558');
+        websocket.onmessage = function (e) {
+            console.log("Data Received: " + e.data);
+        }
+        websocket.onopen = function () {
+            console.log('open');
         };
 
-	</script>
+    };
+
+</script>
 
 </body>
 </html>
