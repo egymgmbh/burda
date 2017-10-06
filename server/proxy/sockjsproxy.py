@@ -37,7 +37,7 @@ class BackendConnection(object):
         self.io_loop.add_timeout(50, self.recieve)
 
     def on_recv(self, data):
-        log.debug('Got %s :: %s', data)
+        log.debug('Got %s', data)
         self.frontend.send(data)
 
 class FrontendTransport(SockJSConnection):

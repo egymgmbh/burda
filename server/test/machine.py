@@ -2,7 +2,8 @@
 import zmq
 import json
 import time
-
+from time import sleep
+from math import sin, radians, fabs
 
 def create_producer(host):
     context = zmq.Context()
@@ -14,7 +15,7 @@ def create_producer(host):
 def create_message(message_name, payload):
     return '{} {}'.format(message_name, json.dumps(
         {'machine_id': 4567, 'machine_type': 'M81', 'timestamp': time.time(), 'rfid': '0x1234567',
-         'payload': json.dumps(payload)}))
+         'payload': payload}))
 
 
 def create_login_payload():
@@ -34,8 +35,8 @@ def create_end_strength_measurement_payload():
     return {'weight': 275}
 
 
-def create_training_position_data_payload():
-    return {'position': 0.75}
+def create_training_position_data_payload(position):
+    return {'position': position}
 
 
 def create_training_weight_data_payload():
@@ -82,8 +83,8 @@ def create_end_strength_measurement_message():
     return create_message('end_strength_measurement', create_end_strength_measurement_payload())
 
 
-def create_training_position_data_message():
-    return create_message('training_position_data', create_training_position_data_payload())
+def create_training_position_data_message(position):
+    return create_message('training_position_data', create_training_position_data_payload(position))
 
 
 def create_training_weight_data_message():
@@ -102,9 +103,10 @@ def send_fake_machine_training_flow(producer):
     producer.send(create_login_message())
     producer.send(create_start_training_message())
 
-    for _ in range(10):
-        producer.send(create_training_position_data_message())
+    for i in range(0, 720, 5):
+        producer.send(create_training_position_data_message(fabs(sin(radians(i)))))
         producer.send(create_training_weight_data_message())
+        sleep(0.1)
     producer.send(create_training_direction_data_message())
     producer.send(create_training_repetition_data_message())
     producer.send(create_end_training_message())

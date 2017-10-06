@@ -4,19 +4,59 @@
 <head>
     <title>sockjsproxy</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="js/pixi.js"></script>
     <script src="js/sockjs-0.3.js"></script>
 </head>
 <body>
 
 <script>
+    var url = 'http://35.195.199.160:5558';
+    var width = 800;
+    var height = 600;
 
-    var websocket = new SockJS('http://35.195.199.160:5558');
+    var app = new PIXI.Application(width, height, {backgroundColor : 0x000000});
+    var stage = new PIXI.Container();
+    app.stage.addChild(stage);
+    document.body.appendChild(app.view);
+
+    var ball = new PIXI.Graphics();
+	stage.addChild(ball);
+	ball.position.x = 350;
+	ball.position.y = 100;
+    ball.clear();
+	ball.lineStyle(0);
+	ball.beginFill(0x0000FF, 0.5);
+	ball.drawCircle(25, 25, 50);
+
+	var position = 0;
+
+	function animate(time_delta) {
+	    ball.position.y = 100 + (height - 200) * position;
+	}
+
+	app.ticker.add(animate);
+
+    var websocket = new SockJS(url);
+
     websocket.onmessage = function (e) {
         console.log("Data Received: " + e.data);
+        var message = splitData(e.data);
+        switch (message.command) {
+            case "training_position_data":
+                position = message.object.payload.position;
+                break;
+        }
     }
+
     websocket.onopen = function () {
-        console.log('open');
+        console.log('Websocket open');
     };
+    function splitData(data) {
+        return {
+            'command': data.substr(0, data.indexOf(" ")),
+            'object': JSON.parse(data.substr(data.indexOf(" ")))
+        };
+    }
 </script>
 
 </body>
