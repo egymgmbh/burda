@@ -1,4 +1,7 @@
 # Burda Hackaday
+
+Presentation slides of the eGym challenge: https://docs.google.com/presentation/d/1iMP5wNzl2cyZ4g1deecPTVYjzG9N7sY15OGWY0jCfo0/edit?usp=sharing
+
 Selected machines at the event will run a special software build that
 will publish certain events during a user workout or strength measurement, making it possible to
 develop interesting applications.
@@ -13,7 +16,7 @@ All the published messages always have 5 attributes:
 * **machine_id**
 the ID of the machine sending the event (e.g. “3756”)
 * **machine_type**
-the machine type of the machine sending the event (“M1”, “M2”, …, “M18”)
+the machine type of the machine sending the event (“M1”, “M2”, …, “M18”). Look up which machine is which here: https://www.egym.de/business/fitness-power
 * **timestamp**
 Time at which the event was emitted by the machine in milliseconds since 1/1/1970 0:00 UTC 
 * **rfid**
