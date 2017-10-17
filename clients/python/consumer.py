@@ -15,7 +15,10 @@ def subscribe_with_filter(host, topic_filter):
 def await_and_consume(subscriber):
     while True:
         msg = subscriber.recv()
-        obj = json.loads(msg)
-        print(obj)
+        try:
+            obj = json.loads(msg)
+            print(obj)
+        except ValueError:
+            print('Failed to parse JSON: ' + msg)
 
 await_and_consume(subscribe("tcp://35.189.246.57:5556"))
