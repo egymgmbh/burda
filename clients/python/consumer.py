@@ -24,4 +24,4 @@ def login_topic_handler(data):
     print("Login with data: {}".format(data))
 
 
-await_and_consume(subscribe("tcp://35.195.199.160:5556"), {'login': login_topic_handler})
+await_and_consume(subscribe("tcp://35.189.246.57:5556"), {'hello': hello_topic_handler})
