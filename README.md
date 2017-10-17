@@ -27,7 +27,7 @@ The payload of the message. These values vary per message type.
 
 An example message might look like this:
 ```JSON
-“login {
+“login": {
    "timestamp":1507214081.483756,
    "rfid":"0x1234567",
    "machine_id":4567,
@@ -39,7 +39,7 @@ An example message might look like this:
       "height":182
    },
    "machine_type":"M18"
-}”
+}
 ```
 All messages are of the form *“<message_type> <message_body>”*.
 
@@ -65,13 +65,13 @@ Emitted when a user logs out.
 
 **Payload:** `null`
 
-    "logout {
+    "logout": {
        "timestamp":1507282654.697113,
        "rfid":"0x1234567",
        "machine_id":4567,
        "payload":null,
        "machine_type":"M18"
-    }"
+    }
 
 #### trainer_needed
 Emitted when a user has logged in, but doesn’t have settings for that particular machine yet.
@@ -81,7 +81,7 @@ Emitted when a user has logged in, but doesn’t have settings for that particul
 #### start_training
 Emitted when a user starts a training.
 
-    "start_training {
+    "start_training": {
        "timestamp":1507278857.209818,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -92,7 +92,7 @@ Emitted when a user starts a training.
           "number_of_repetitions":8
        },
        "machine_type":"M18"
-    }"
+    }
 
 **Payload:** JSON object with keys
 * **training_method**
@@ -107,7 +107,7 @@ number, recommended number of repetitions for the training
 #### end_training
 Emitted when a user ends the training.
 
-    "end_training {
+    "end_training": {
        "timestamp":1507283268.229535,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -115,7 +115,7 @@ Emitted when a user ends the training.
           "moved_weight":480
        },
        "machine_type":"M18"
-    }"
+    }
 
 **Payload:** JSON object with keys
 * **moved_weight**
@@ -124,20 +124,20 @@ number, the weight moved during the training in kilograms
 #### start_strength_measurement
 Emitted when a user starts a strength measurement.
 
-    "start_strength_measurement {
+    "start_strength_measurement": {
        "timestamp":1507283268.229615,
        "rfid":"0x1234567",
        "machine_id":4567,
        "payload":"null,
        "machine_type":"M18"
-    }"
+    }
 
 **Payload:** `null`
 
 #### end_strength_measurement
 Emitted when a user accepts a strength measurement.
 
-    "end_strength_measurement {
+    "end_strength_measurement": {
        "timestamp":1507283268.229639,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -145,7 +145,7 @@ Emitted when a user accepts a strength measurement.
           "weight":275
        },
        "machine_type":"M18"
-    }"
+    }
 
 **Payload:**  JSON object with keys
 * **weight**
@@ -154,7 +154,7 @@ number, the result of the strength measurement in kilograms
 #### training_position_data
 Emitted every 100ms during a training session.
 
-    "training_position_data {
+    "training_position_data": {
        "timestamp":1507283268.229425,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -162,7 +162,7 @@ Emitted every 100ms during a training session.
           "position":0.75
        },
        "machine_type":"M18"
-    }"
+    }
 
 **Payload:** JSON object with keys
 * **position**
@@ -174,7 +174,7 @@ Emitted every 100ms during a training session. Most interesting for isokinetic t
 the weight during repetitions, but can also be used to detect changes in weight due to a user clicking on the 
 respective button.
 
-    "training_weight_data {
+    "training_weight_data": {
        "timestamp":1507283268.229454,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -182,7 +182,7 @@ respective button.
           "weight":65
        },
        "machine_type":"M18"
-    }"
+    }
 
 **Payload:** JSON object with keys
 * **weight** number. The current training weight in kg. 
@@ -190,7 +190,7 @@ respective button.
 #### training_direction_data
 Emitted every time the training direction changes during training
 
-    "training_direction_data {
+    "training_direction_data": {
        "timestamp":1507283268.22948,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -198,7 +198,7 @@ Emitted every time the training direction changes during training
           "direction":"concentric"
        },
        "machine_type":"M18"
-    }"
+    }
 
 **Payload:** JSON object with keys
 * **direction** string. Either “concentric” or “excentric”. 
@@ -206,7 +206,7 @@ Emitted every time the training direction changes during training
 #### training_repetition_data
 Emitted every time the user completes a repetition during training.
 
-    "training_repetition_data {
+    "training_repetition_data": {
        "timestamp":1507283268.229506,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -214,7 +214,7 @@ Emitted every time the user completes a repetition during training.
           "repetition":3
        },
        "machine_type":"M18"
-    }"
+    }
 
 
 **Payload:** JSON object with keys
