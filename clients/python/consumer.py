@@ -1,4 +1,5 @@
 import zmq
+import json
 
 
 def subscribe(host):
@@ -11,17 +12,10 @@ def subscribe_with_filter(host, topic_filter):
     subscriber.connect(host)
     return subscriber
 
-
-def await_and_consume(subscriber, handlers):
+def await_and_consume(subscriber):
     while True:
-        (type, data) = subscriber.recv_string().split(' ', 1)
-        handler = handlers.get(type, None)
-        if handler:
-            handler(data)
+        msg = subscriber.recv()
+        obj = json.loads(msg)
+        print(obj)
 
-
-def login_topic_handler(data):
-    print("Login with data: {}".format(data))
-
-
-await_and_consume(subscribe("tcp://35.189.246.57:5556"), {'hello': hello_topic_handler})
+await_and_consume(subscribe("tcp://35.189.246.57:5556"))
