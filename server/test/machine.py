@@ -13,7 +13,7 @@ def create_producer(host):
 
 
 def create_message(message_name, payload):
-    return '{{\n"{}": {}\n}}'.format(message_name, json.dumps(
+    return '{{\n"message_type": "{}",\n"body": {}\n}}'.format(message_name, json.dumps(
         {'machine_id': 4567, 'machine_type': 'M81', 'timestamp': time.time(), 'rfid': '0x1234567',
          'payload': payload}))
 
