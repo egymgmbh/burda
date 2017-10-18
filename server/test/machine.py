@@ -13,7 +13,7 @@ def create_producer(host):
 
 
 def create_message(message_name, payload):
-    return '{} {}'.format(message_name, json.dumps(
+    return '{{\n"message_type": "{}",\n"body": {}\n}}'.format(message_name, json.dumps(
         {'machine_id': 4567, 'machine_type': 'M81', 'timestamp': time.time(), 'rfid': '0x1234567',
          'payload': payload}))
 
@@ -120,6 +120,6 @@ def send_fake_machine_strength_measurment_flow(producer):
     producer.send(create_logout_message())
 
 
-producer = create_producer("tcp://35.195.199.160:5557")
+producer = create_producer("tcp://35.189.246.57:5557")
 send_fake_machine_training_flow(producer)
 send_fake_machine_strength_measurment_flow(producer)

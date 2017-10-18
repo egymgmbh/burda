@@ -2,6 +2,7 @@ group 'de.egym'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'application'
 
 sourceCompatibility = 1.8
 
@@ -14,3 +15,7 @@ dependencies {
 
     compile group: 'org.zeromq', name: 'jeromq', version: '0.4.2'
 }
+
+// The application plugin uses this,
+// for the run task.
+mainClassName = "de.egym.Application"

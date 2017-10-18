@@ -10,7 +10,7 @@ import org.zeromq.ZMQ;
 
 public final class Application {
 
-	private static final String HOST = "tcp://35.195.199.160:5556";
+	private static final String HOST = "tcp://35.189.246.57:5556";
 
 	private Application() {
 
@@ -28,10 +28,11 @@ public final class Application {
 
 	private void processEvents(final ZMQ.Socket socket) {
 		while (true) {
-			final String[] data = socket.recvStr().split(" ", 2);
-			final String topic = data[0];
-			final String payload = data[1];
-			System.out.println(topic + ", " + payload);
+			final String data = socket.recvStr();
+
+                        // TODO: Use a JSON parser to get the message_type and the body.
+
+			System.out.println(data);
 		}
 	}
 

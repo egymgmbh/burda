@@ -40,10 +40,10 @@
 
     websocket.onmessage = function (e) {
         console.log("Data Received: " + e.data);
-        var message = splitData(e.data);
-        switch (message.command) {
+        var message = JSON.parse(e.data);
+        switch (message.message_type) {
             case "training_position_data":
-                position = message.object.payload.position;
+                position = message.body.payload.position;
                 break;
         }
     }
@@ -51,12 +51,6 @@
     websocket.onopen = function () {
         console.log('Websocket open');
     };
-    function splitData(data) {
-        return {
-            'command': data.substr(0, data.indexOf(" ")),
-            'object': JSON.parse(data.substr(data.indexOf(" ")))
-        };
-    }
 </script>
 
 </body>
