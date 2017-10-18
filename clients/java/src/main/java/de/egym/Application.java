@@ -10,7 +10,7 @@ import org.zeromq.ZMQ;
 
 public final class Application {
 
-	private static final String HOST = "tcp://35.195.199.160:5556";
+	private static final String HOST = "tcp://35.189.246.57:5556";
 
 	private Application() {
 
