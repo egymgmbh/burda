@@ -27,21 +27,24 @@ The payload of the message. These values vary per message type.
 
 An example message might look like this:
 ```JSON
-“login": {
-   "timestamp":1507214081.483756,
-   "rfid":"0x1234567",
-   "machine_id":4567,
-   "payload":{
-      "gender":"Male",
-      "intensity":"MEDIUM",
-      "first_name":"Shawn",
-      "goal":"FITNESS",
-      "height":182
-   },
-   "machine_type":"M18"
+{
+  "message_type":“login":
+  "body":{
+     "timestamp":1507214081.483756,
+     "rfid":"0x1234567",
+     "machine_id":4567,
+     "payload":{
+        "gender":"Male",
+        "intensity":"MEDIUM",
+        "first_name":"Shawn",
+        "goal":"FITNESS",
+        "height":182
+     },
+     "machine_type":"M18"
+  }
 }
 ```
-All messages are of the form *“<message_type> <message_body>”*.
+All messages have both a message_type and a body.
 
 ### Payload Definition
 
@@ -65,7 +68,8 @@ Emitted when a user logs out.
 
 **Payload:** `null`
 
-    "logout": {
+    "message_type":"logout"
+    "body":{
        "timestamp":1507282654.697113,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -81,7 +85,8 @@ Emitted when a user has logged in, but doesn’t have settings for that particul
 #### start_training
 Emitted when a user starts a training.
 
-    "start_training": {
+    "message_type":"start_training"
+    "body":{
        "timestamp":1507278857.209818,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -107,7 +112,8 @@ number, recommended number of repetitions for the training
 #### end_training
 Emitted when a user ends the training.
 
-    "end_training": {
+    "message_type":"end_training"
+    "body":{
        "timestamp":1507283268.229535,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -124,7 +130,8 @@ number, the weight moved during the training in kilograms
 #### start_strength_measurement
 Emitted when a user starts a strength measurement.
 
-    "start_strength_measurement": {
+    "message_type":"start_strength_measurement"
+    "body":{
        "timestamp":1507283268.229615,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -137,7 +144,8 @@ Emitted when a user starts a strength measurement.
 #### end_strength_measurement
 Emitted when a user accepts a strength measurement.
 
-    "end_strength_measurement": {
+    "message_type":"end_strength_measurement"
+    "body":{
        "timestamp":1507283268.229639,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -154,7 +162,8 @@ number, the result of the strength measurement in kilograms
 #### training_position_data
 Emitted every 100ms during a training session.
 
-    "training_position_data": {
+    "message_type":"training_position_data"
+    "body":{
        "timestamp":1507283268.229425,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -174,7 +183,8 @@ Emitted every 100ms during a training session. Most interesting for isokinetic t
 the weight during repetitions, but can also be used to detect changes in weight due to a user clicking on the
 respective button.
 
-    "training_weight_data": {
+    "message_type":"training_weight_data"
+    "body":{
        "timestamp":1507283268.229454,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -190,7 +200,8 @@ respective button.
 #### training_direction_data
 Emitted every time the training direction changes during training
 
-    "training_direction_data": {
+    "message_type":"training_direction_data"
+    "body":{
        "timestamp":1507283268.22948,
        "rfid":"0x1234567",
        "machine_id":4567,
@@ -206,7 +217,8 @@ Emitted every time the training direction changes during training
 #### training_repetition_data
 Emitted every time the user completes a repetition during training.
 
-    "training_repetition_data": {
+    "message_type":"training_repetition_data"
+    "body":{
        "timestamp":1507283268.229506,
        "rfid":"0x1234567",
        "machine_id":4567,
