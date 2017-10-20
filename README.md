@@ -6,8 +6,8 @@ Selected machines at the event will run a special software build that
 will publish certain events during a user workout or strength measurement, making it possible to
 develop interesting applications.
 
-In order to consume such messages, each application will need to 
-subscribe to a ZeroMQ server. Developers using the provided API are able to 
+In order to consume such messages, each application will need to
+subscribe to a ZeroMQ server. Developers using the provided API are able to
 subscribe to a variety of different message topics which are described below.
 
 ## Message format
@@ -18,9 +18,9 @@ the ID of the machine sending the event (e.g. “3756”)
 * **machine_type**
 the machine type of the machine sending the event (“M1”, “M2”, …, “M18”). Look up which machine is which here: https://www.egym.de/business/fitness-power
 * **timestamp**
-Time at which the event was emitted by the machine in milliseconds since 1/1/1970 0:00 UTC 
+Time at which the event was emitted by the machine in milliseconds since 1/1/1970 0:00 UTC
 * **rfid**
-rfid of the user logged in at the time of the event (e.g. 000003ed). 
+rfid of the user logged in at the time of the event (e.g. 000003ed).
 Can be used to match events to users.
 * **payload**
 The payload of the message. These values vary per message type.
@@ -166,12 +166,12 @@ Emitted every 100ms during a training session.
 
 **Payload:** JSON object with keys
 * **position**
-number between 0.0 and 1.0. Describes the position of the training lever 
+number between 0.0 and 1.0. Describes the position of the training lever
 in percent of the range of motion.
 
 #### training_weight_data
-Emitted every 100ms during a training session. Most interesting for isokinetic training where the machine adjusts 
-the weight during repetitions, but can also be used to detect changes in weight due to a user clicking on the 
+Emitted every 100ms during a training session. Most interesting for isokinetic training where the machine adjusts
+the weight during repetitions, but can also be used to detect changes in weight due to a user clicking on the
 respective button.
 
     "training_weight_data": {
@@ -185,7 +185,7 @@ respective button.
     }
 
 **Payload:** JSON object with keys
-* **weight** number. The current training weight in kg. 
+* **weight** number. The current training weight in kg.
 
 #### training_direction_data
 Emitted every time the training direction changes during training
@@ -201,7 +201,7 @@ Emitted every time the training direction changes during training
     }
 
 **Payload:** JSON object with keys
-* **direction** string. Either “concentric” or “excentric”. 
+* **direction** string. Either “concentric” or “excentric”.
 
 #### training_repetition_data
 Emitted every time the user completes a repetition during training.
