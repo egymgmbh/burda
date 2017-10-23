@@ -8,7 +8,7 @@ def subscribe(host):
 
 def subscribe_with_filter(host, topic_filter):
     subscriber = zmq.Context().socket(zmq.SUB)
-    subscriber.setsockopt(zmq.SUBSCRIBE, topic_filter)
+    subscriber.setsockopt_string(zmq.SUBSCRIBE, topic_filter)
     subscriber.connect(host)
     return subscriber
 
