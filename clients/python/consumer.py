@@ -14,7 +14,7 @@ def subscribe_with_filter(host, topic_filter):
 
 def await_and_consume(subscriber, handlers):
     while True:
-        msg = subscriber.recv()
+        msg = subscriber.recv_string()
         try:
             obj = json.loads(msg)
             # print(obj)
