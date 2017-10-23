@@ -1,9 +1,15 @@
 #!/usr/bin/env python
+
 import zmq
 import json
 import time
 from time import sleep
 from math import sin, radians, fabs
+import sys
+
+if sys.version_info < (3, 0):
+    print("This script requires Python 3.")
+    sys.exit(1)
 
 def create_producer(host):
     context = zmq.Context()

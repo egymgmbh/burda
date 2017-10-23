@@ -1,6 +1,12 @@
+#!/usr/bin/env python
+
 import zmq
 import json
+import sys
 
+if sys.version_info < (3, 0):
+    print("This script requires Python 3.")
+    sys.exit(1)
 
 def subscribe(host):
     return subscribe_with_filter(host, "")

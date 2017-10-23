@@ -1,5 +1,12 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
+
 import zmq
+
+import sys
+
+if sys.version_info < (3, 0):
+    print("This script requires Python 3.")
+    sys.exit(1)
 
 context = zmq.Context()
 consumer = context.socket(zmq.PULL)
