@@ -100,24 +100,24 @@ def create_training_repetition_data_message():
 
 
 def send_fake_machine_training_flow(producer):
-    producer.send(create_login_message())
-    producer.send(create_start_training_message())
+    producer.send_string(create_login_message())
+    producer.send_string(create_start_training_message())
 
     for i in range(0, 720, 5):
-        producer.send(create_training_position_data_message(fabs(sin(radians(i)))))
-        producer.send(create_training_weight_data_message())
+        producer.send_string(create_training_position_data_message(fabs(sin(radians(i)))))
+        producer.send_string(create_training_weight_data_message())
         sleep(0.1)
-    producer.send(create_training_direction_data_message())
-    producer.send(create_training_repetition_data_message())
-    producer.send(create_end_training_message())
-    producer.send(create_logout_message())
+    producer.send_string(create_training_direction_data_message())
+    producer.send_string(create_training_repetition_data_message())
+    producer.send_string(create_end_training_message())
+    producer.send_string(create_logout_message())
 
 
 def send_fake_machine_strength_measurment_flow(producer):
-    producer.send(create_login_message())
-    producer.send(create_start_strength_measurement_message())
-    producer.send(create_end_strength_measurement_message())
-    producer.send(create_logout_message())
+    producer.send_string(create_login_message())
+    producer.send_string(create_start_strength_measurement_message())
+    producer.send_string(create_end_strength_measurement_message())
+    producer.send_string(create_logout_message())
 
 
 producer = create_producer("tcp://35.189.246.57:5557")
