@@ -18,7 +18,7 @@ $ kubectl apply -f deploy/burda.yaml
 
 You can then discover the server's IP address like so:
 ```
-$ kubectl get all --namespace=burda-hackday
+$ kubectl get services --namespace=burda-hackday
 ```
 
 You can test the server by running the test machine.py and consumer.py scripts in separate terminals.
